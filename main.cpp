@@ -1,9 +1,23 @@
+#include "raylib.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World" << endl;
-    return 0;
+
+    InitWindow(800, 450, "Hello World");
+
+    while (!WindowShouldClose())
+    {
+        BeginDrawing();
+
+        ClearBackground(BLUE);
+
+        DrawText("Hello World", 10, 10, 20, LIGHTGRAY);
+
+        EndDrawing();
+    }
+
+    CloseWindow();
 }
