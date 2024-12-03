@@ -23,7 +23,7 @@ int main()
         int randomY = rand() % 20;
         int randomX = rand() % 10;
         int randomColor = rand() % 10;
-        board.grid[randomY - 1][randomX - 1] = randomColor;
+        board.grid[randomY][randomX] = randomColor;
 
         board.Draw();
 
