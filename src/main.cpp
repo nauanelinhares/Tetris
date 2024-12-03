@@ -1,20 +1,31 @@
 #include "raylib.h"
+#include "board.h"
 #include <iostream>
+#include <random>
 
 using namespace std;
 
 int main()
 {
 
-    InitWindow(800, 450, "Hello World");
+    InitWindow(300, 600, "Hello World");
+
+    SetTargetFPS(60);
+
+    Board board = Board();
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
 
-        ClearBackground(DARKBLUE);
+        ClearBackground(WHITE);
 
-        DrawText("Hello World", 10, 10, 20, LIGHTGRAY);
+        int randomY = rand() % 20;
+        int randomX = rand() % 10;
+        int randomColor = rand() % 10;
+        board.grid[randomY - 1][randomX - 1] = randomColor;
+
+        board.Draw();
 
         EndDrawing();
     }
