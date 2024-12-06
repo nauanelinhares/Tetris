@@ -9,8 +9,10 @@ using namespace std;
 class Block
 {
 private:
-    int RotationState;
+    int RotationState = 0;
     int cellSize = CELLSIZE;
+    int offSetRow = 0;
+    int offSetColumn = 0;
 
 public:
     Block();
@@ -19,6 +21,7 @@ public:
     std::vector<Color> GetCellColours();
 
     void Move(int key);
+    vector<Position> UpdatedPositions();
 
     int id;
     std::vector<Color> colors;

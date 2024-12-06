@@ -1,5 +1,6 @@
 #include "block.h"
 #include "raylib.h" // Include the raylib header for drawing functions
+#include <iostream>
 
 Block::Block() {}
 
@@ -17,11 +18,12 @@ int Block::Rotate()
 
 void Block::Draw(int state)
 {
+    std::vector<Position> cells = UpdatedPositions();
 
-    for (int i = 0; i < cells[state].size(); i++)
+    for (int i = 0; i < cells.size(); i++)
     {
 
-        DrawRectangle(cellSize * cells[state][i].column, cellSize * cells[state][i].row, cellSize - 1, cellSize - 1, RED_GAME_COLOR);
+        DrawRectangle(cellSize * cells[i].column, cellSize * cells[i].row, cellSize - 1, cellSize - 1, RED_GAME_COLOR);
     }
 };
 
@@ -42,32 +44,33 @@ std::vector<Color> Block::GetCellColours()
 
 void Block::Move(int key)
 {
+
     if (key == KEY_UP)
     {
-        for (Position &cell : cells[RotationState])
-        {
-            cell.row--;
-        }
+        offSetRow--;
     }
     else if (key == KEY_DOWN)
     {
-        for (Position &cell : cells[RotationState])
-        {
-            cell.row++;
-        }
+        offSetRow++;
     }
     else if (key == KEY_LEFT)
     {
-        for (Position &cell : cells[RotationState])
-        {
-            cell.column--;
-        }
+        offSetColumn--;
     }
     else if (key == KEY_RIGHT)
     {
-        for (Position &cell : cells[RotationState])
-        {
-            cell.column++;
-        }
+        offSetColumn++;
     }
+}
+
+vector<Position> Block::UpdatedPositions()
+{
+    vector<Position> blockPosition;
+
+    for (Position cell : cells[RotationState])
+    {
+        blockPosition.push_back(Position{cell.column + offSetColumn, cell.row + offSetRow});
+    }
+
+    return blockPosition;
 }
