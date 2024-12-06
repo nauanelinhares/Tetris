@@ -2,7 +2,7 @@ class Position
 {
 private:
 public:
-    Position(int row, int column);
+    Position(int column, int row);
 
     int row;
     int column;
