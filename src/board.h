@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <raylib.h>
+#include "constants.h"
 
 #pragma once
 
@@ -18,7 +19,7 @@ public:
 private:
     int rows;
     int cols;
-    int cellSize;
+    int cellSize = CELLSIZE;
 
     std::vector<Color> colors;
 };
