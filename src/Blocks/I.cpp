@@ -6,7 +6,7 @@ class IBlock : public Block
 public:
     IBlock()
     {
-        id = 10;
+        id = 7;
 
         /*
 
@@ -37,25 +37,25 @@ public:
 
         */
 
-        cellsState[0] = {
+        cells[0] = {
             Position(0, 2),
             Position(1, 2),
             Position(2, 2),
             Position(3, 2)};
 
-        cellsState[1] = {
+        cells[1] = {
             Position(2, 0),
             Position(2, 1),
             Position(2, 2),
             Position(2, 3)};
 
-        cellsState[2] = {
+        cells[2] = {
             Position(1, 2),
             Position(2, 2),
             Position(3, 2),
             Position(4, 2)};
 
-        cellsState[3] = {
+        cells[3] = {
             Position(2, 1),
             Position(2, 2),
             Position(2, 3),

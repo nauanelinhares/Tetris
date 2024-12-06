@@ -6,7 +6,7 @@ class LBlock : public Block
 public:
     LBlock()
     {
-        id = 10;
+        id = 6;
 
         /*
 
@@ -29,25 +29,25 @@ public:
 
         */
 
-        cellsState[0] = {
+        cells[0] = {
             Position(1, 0),
             Position(1, 1),
             Position(1, 2),
             Position(2, 2)};
 
-        cellsState[1] = {
+        cells[1] = {
             Position(0, 1),
             Position(0, 2),
             Position(1, 1),
             Position(2, 1)};
 
-        cellsState[2] = {
+        cells[2] = {
             Position(0, 0),
             Position(1, 0),
             Position(1, 1),
             Position(1, 2)};
 
-        cellsState[3] = {
+        cells[3] = {
             Position(2, 0),
             Position(0, 1),
             Position(1, 1),
