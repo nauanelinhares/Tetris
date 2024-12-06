@@ -15,7 +15,7 @@ public:
 
         cellsState[1] = {
             Position(0, 0),
-            Position(0, 1),
+            Position(1, 0),
             Position(1, 0),
             Position(1, 1)};
 
