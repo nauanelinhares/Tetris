@@ -1,5 +1,7 @@
 #include "raylib.h"
 #include "board.h"
+#include "block.h"
+#include "Blocks/square.cpp"
 #include <iostream>
 #include <random>
 
@@ -14,18 +16,17 @@ int main()
 
     Board board = Board();
 
+    SquareBlock square = SquareBlock();
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
 
         ClearBackground(WHITE);
 
-        int randomY = rand() % 20;
-        int randomX = rand() % 10;
-        int randomColor = rand() % 10;
-        board.grid[randomY][randomX] = randomColor;
-
         board.Draw();
+
+        square.Draw(0);
 
         EndDrawing();
     }
