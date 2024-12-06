@@ -2,6 +2,9 @@
 #include "board.h"
 #include "block.h"
 #include "Blocks/square.cpp"
+#include "Blocks/I.cpp"
+
+#include "Blocks/L.cpp"
 #include <iostream>
 #include <random>
 
@@ -16,7 +19,13 @@ int main()
 
     Board board = Board();
 
-    SquareBlock square = SquareBlock();
+    // TBlock square = TBlock();
+
+    IBlock I = IBlock();
+
+    LBlock L = LBlock();
+    int i = 0;
+    int keyPressed;
 
     while (!WindowShouldClose())
     {
@@ -26,7 +35,18 @@ int main()
 
         board.Draw();
 
-        square.Draw(0);
+        keyPressed = GetKeyPressed();
+
+        I.Move(keyPressed);
+
+        I.Draw(i / 60);
+
+        if (i > 239)
+        {
+            i = 0;
+        }
+
+        i++;
 
         EndDrawing();
     }
