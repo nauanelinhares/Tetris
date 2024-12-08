@@ -16,28 +16,15 @@ int main()
 
     Game game = Game();
 
-    int keyPressed;
-
-    Block L = game.GetRandomBlock();
+    game.StartGame();
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
 
-        ClearBackground(WHITE);
+        ClearBackground(DARKBLUE);
 
-        game.board.Draw();
-
-        keyPressed = GetKeyPressed();
-
-        if (keyPressed == KEY_ENTER)
-            L = game.GetRandomBlock();
-
-        L.Move(keyPressed);
-
-        L.Rotate(keyPressed);
-
-        L.Draw();
+        game.Update();
 
         EndDrawing();
     }
