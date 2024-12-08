@@ -23,7 +23,8 @@ public:
     int Rotate(int key);
     bool CanMove(int columns, int rows, int row, int column);
     bool CanRotate(int column, int row);
-    void Move(int key, int columns, int rows);
+    void Move(int columnChange, int rowChange, int columns, int rows);
+    vector<int> GetChanges(int key);
     vector<Position> UpdatedPositions();
 
     int id;

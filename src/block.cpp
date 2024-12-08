@@ -54,8 +54,9 @@ bool Block::CanMove(int columns, int rows, int columnChange, int rowChange)
     return true;
 }
 
-void Block::Move(int key, int columns, int rows)
+vector<int> Block::GetChanges(int key)
 {
+
     int columnChange = 0;
     int rowChange = 0;
 
@@ -76,6 +77,12 @@ void Block::Move(int key, int columns, int rows)
     default:
         break;
     }
+
+    return {columnChange, rowChange};
+}
+
+void Block::Move(int columnChange, int rowChange, int columns, int rows)
+{
 
     bool canMove = CanMove(columns, rows, columnChange, rowChange);
 

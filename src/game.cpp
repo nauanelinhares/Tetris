@@ -10,6 +10,24 @@
 #include "Blocks/ZInverse.cpp"
 #include "Blocks/Z.cpp"
 #include <iostream>
+
+double savedTime = GetTime();
+
+bool lostPositionTrigger()
+{
+
+    double time;
+    time = GetTime();
+
+    if (time - savedTime >= 0.5)
+    {
+        savedTime = GetTime();
+        return true;
+    }
+
+    return false;
+}
+
 Game::Game()
 {
     board = Board();
@@ -54,7 +72,15 @@ void Game::Update()
 void Game::Draw(int key)
 {
     board.Draw();
-    currentBlock.Move(keyPressed, board.cols, board.rows);
+
+    vector<int> changes;
+    changes = currentBlock.GetChanges(key);
+
+    currentBlock.Move(changes[0], changes[1], board.cols, board.rows);
+
+    if (lostPositionTrigger())
+        currentBlock.Move(changes[0], 1, board.cols, board.rows);
+
     currentBlock.Rotate(keyPressed);
     currentBlock.Draw();
 }
