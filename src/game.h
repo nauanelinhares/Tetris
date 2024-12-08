@@ -7,7 +7,7 @@ class Game
 public:
     Game();
     void StartGame();
-    void Draw();
+    void Draw(int key);
     void Update();
     Block GetRandomBlock();
     std::vector<Block> GetAllBlocks();

@@ -37,19 +37,23 @@ std::vector<Block> Game::GetAllBlocks()
 
 void Game::StartGame()
 {
-    board.Draw();
     currentBlock = GetRandomBlock();
 }
 
 void Game::Update()
 {
-    board.Draw();
 
     keyPressed = GetKeyPressed();
 
     if (keyPressed == KEY_ENTER)
         currentBlock = GetRandomBlock();
 
+    Draw(keyPressed);
+}
+
+void Game::Draw(int key)
+{
+    board.Draw();
     currentBlock.Move(keyPressed);
     currentBlock.Rotate(keyPressed);
     currentBlock.Draw();
