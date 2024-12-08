@@ -25,6 +25,7 @@ public:
     vector<Position> UpdatedPositions();
 
     int id;
+    Color color;
     std::vector<Color> colors;
     map<int, vector<Position>> cells;
 };

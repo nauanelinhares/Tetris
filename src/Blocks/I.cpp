@@ -7,6 +7,7 @@ public:
     IBlock()
     {
         id = 7;
+        color = colors[id];
 
         /*
 

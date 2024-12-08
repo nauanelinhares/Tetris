@@ -7,6 +7,7 @@ public:
     LBlock()
     {
         id = 6;
+        color = colors[id];
 
         /*
 

@@ -8,6 +8,8 @@ public:
     {
         id = 5;
 
+        color = colors[id];
+
         /*
 
         x * x

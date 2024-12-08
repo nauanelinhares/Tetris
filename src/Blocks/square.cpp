@@ -7,6 +7,8 @@ public:
     SquareBlock()
     {
         id = 4;
+        color = colors[id];
+
         cells[0] = {
             Position(0, 0),
             Position(0, 1),
@@ -15,7 +17,7 @@ public:
 
         cells[1] = {
             Position(0, 0),
-            Position(1, 0),
+            Position(0, 1),
             Position(1, 0),
             Position(1, 1)};
 

@@ -7,6 +7,7 @@ public:
     ZBlock()
     {
         id = 2;
+        color = colors[id];
 
         /*
 

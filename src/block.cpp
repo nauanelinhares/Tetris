@@ -2,7 +2,10 @@
 #include "raylib.h" // Include the raylib header for drawing functions
 #include <iostream>
 
-Block::Block() {}
+Block::Block()
+{
+    colors = GetCellColours();
+}
 
 int Block::Rotate(int key)
 {
@@ -28,7 +31,7 @@ void Block::Draw()
     for (int i = 0; i < cells.size(); i++)
     {
 
-        DrawRectangle(cellSize * cells[i].column, cellSize * cells[i].row, cellSize - 1, cellSize - 1, RED_GAME_COLOR);
+        DrawRectangle(cellSize * cells[i].column, cellSize * cells[i].row, cellSize - 1, cellSize - 1, color);
     }
 };
 

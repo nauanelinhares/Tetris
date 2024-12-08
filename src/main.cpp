@@ -1,10 +1,7 @@
 #include "raylib.h"
 #include "board.h"
 #include "block.h"
-#include "Blocks/square.cpp"
-#include "Blocks/I.cpp"
-
-#include "Blocks/L.cpp"
+#include "game.h"
 #include <iostream>
 #include <random>
 
@@ -17,15 +14,11 @@ int main()
 
     SetTargetFPS(60);
 
-    Board board = Board();
+    Game game = Game();
 
-    // TBlock square = TBlock();
-
-    IBlock I = IBlock();
-
-    LBlock L = LBlock();
-    int i = 0;
     int keyPressed;
+
+    Block L = game.GetRandomBlock();
 
     while (!WindowShouldClose())
     {
@@ -33,9 +26,12 @@ int main()
 
         ClearBackground(WHITE);
 
-        board.Draw();
+        game.board.Draw();
 
         keyPressed = GetKeyPressed();
+
+        if (keyPressed == KEY_ENTER)
+            L = game.GetRandomBlock();
 
         L.Move(keyPressed);
 

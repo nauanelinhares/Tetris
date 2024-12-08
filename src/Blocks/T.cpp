@@ -7,6 +7,8 @@ public:
     TBlock()
     {
         id = 3;
+        color = colors[id];
+
         /*
 
         x * x

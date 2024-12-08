@@ -7,6 +7,7 @@ public:
     ZInverseBlock()
     {
         id = 1;
+        color = colors[id];
 
         /*
 
@@ -52,5 +53,5 @@ public:
             Position(1, 1),
             Position(2, 1),
             Position(2, 2)};
-    };
+    }
 };
