@@ -14,11 +14,11 @@ public:
     void Start();
     void Draw();
 
+    int rows;
+    int cols;
     std::vector<Color> GetCellColours();
 
 private:
-    int rows;
-    int cols;
     int cellSize = CELLSIZE;
 
     std::vector<Color> colors;

@@ -54,7 +54,7 @@ void Game::Update()
 void Game::Draw(int key)
 {
     board.Draw();
-    currentBlock.Move(keyPressed);
+    currentBlock.Move(keyPressed, board.cols, board.rows);
     currentBlock.Rotate(keyPressed);
     currentBlock.Draw();
 }

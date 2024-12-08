@@ -7,23 +7,6 @@ Block::Block()
     colors = GetCellColours();
 }
 
-int Block::Rotate(int key)
-{
-    if (key != KEY_SPACE)
-    {
-        return RotationState;
-    }
-
-    RotationState++;
-
-    if (RotationState > 3)
-    {
-        RotationState = 0;
-    }
-
-    return RotationState;
-};
-
 void Block::Draw()
 {
     std::vector<Position> cells = UpdatedPositions();
@@ -50,26 +33,82 @@ std::vector<Color> Block::GetCellColours()
         MAGENTA_GAME_COLOR};
 }
 
-void Block::Move(int key)
+bool Block::CanMove(int columns, int rows, int columnChange, int rowChange)
 {
+    for (Position cell : cells[RotationState])
+    {
+        int newColumn = cell.column + offSetColumn + columnChange;
+        int newRow = cell.row + offSetRow + rowChange;
 
-    if (key == KEY_UP)
-    {
-        offSetRow--;
+        if (columnChange != 0 && (newColumn < 0 || newColumn >= columns))
+        {
+            return false;
+        }
+
+        if (rowChange != 0 && (newRow < 0 || newRow >= rows))
+        {
+            return false;
+        }
     }
-    else if (key == KEY_DOWN)
-    {
-        offSetRow++;
-    }
-    else if (key == KEY_LEFT)
-    {
-        offSetColumn--;
-    }
-    else if (key == KEY_RIGHT)
-    {
-        offSetColumn++;
-    }
+
+    return true;
 }
+
+void Block::Move(int key, int columns, int rows)
+{
+    int columnChange = 0;
+    int rowChange = 0;
+
+    switch (key)
+    {
+    case KEY_UP:
+        rowChange--;
+        break;
+    case KEY_DOWN:
+        rowChange++;
+        break;
+    case KEY_LEFT:
+        columnChange--;
+        break;
+    case KEY_RIGHT:
+        columnChange++;
+        break;
+    default:
+        break;
+    }
+
+    bool canMove = CanMove(columns, rows, columnChange, rowChange);
+
+    if (!canMove)
+    {
+        return;
+    }
+
+    offSetRow = offSetRow + rowChange;
+    offSetColumn = offSetColumn + columnChange;
+}
+
+bool Block::CanRotate(int column, int row)
+{
+    return true;
+}
+
+int Block::Rotate(int key)
+{
+    if (key != KEY_SPACE)
+    {
+        return RotationState;
+    }
+
+    RotationState++;
+
+    if (RotationState > 3)
+    {
+        RotationState = 0;
+    }
+
+    return RotationState;
+};
 
 vector<Position> Block::UpdatedPositions()
 {
