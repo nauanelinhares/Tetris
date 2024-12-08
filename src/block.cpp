@@ -4,8 +4,13 @@
 
 Block::Block() {}
 
-int Block::Rotate()
+int Block::Rotate(int key)
 {
+    if (key != KEY_SPACE)
+    {
+        return RotationState;
+    }
+
     RotationState++;
 
     if (RotationState > 3)
@@ -16,7 +21,7 @@ int Block::Rotate()
     return RotationState;
 };
 
-void Block::Draw(int state)
+void Block::Draw()
 {
     std::vector<Position> cells = UpdatedPositions();
 
