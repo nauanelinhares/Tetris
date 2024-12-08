@@ -20,7 +20,7 @@ void Board::Start()
     {
         for (int j = 0; j < cols; j++)
         {
-            grid[i][j] = 0; // Initialize the grid cell to 0
+            grid[i][j] = 0;
         }
     }
 }
@@ -36,7 +36,7 @@ void Board::Draw()
         {
             cellValue = grid[i][j];
 
-            DrawRectangle(cellSize * j, cellSize * i, cellSize - 1, cellSize - 1, DARK_GRAY_GAME_COLOR);
+            DrawRectangle(cellSize * j, cellSize * i, cellSize - 0.5, cellSize - 0.5, DARK_GRAY_GAME_COLOR);
         }
     }
 }

@@ -16,10 +16,11 @@ private:
 
 public:
     Block();
-    void Draw(int state);
-    int Rotate();
+    void Draw();
+
     std::vector<Color> GetCellColours();
 
+    int Rotate(int key);
     void Move(int key);
     vector<Position> UpdatedPositions();
 

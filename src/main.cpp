@@ -37,16 +37,11 @@ int main()
 
         keyPressed = GetKeyPressed();
 
-        I.Move(keyPressed);
+        L.Move(keyPressed);
 
-        I.Draw(i / 60);
+        L.Rotate(keyPressed);
 
-        if (i > 239)
-        {
-            i = 0;
-        }
-
-        i++;
+        L.Draw();
 
         EndDrawing();
     }
