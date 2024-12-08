@@ -13,14 +13,7 @@
 Game::Game()
 {
     board = Board();
-    blocks = {
-        SquareBlock(),
-        IBlock(),
-        LBlock(),
-        LInverseBlock(),
-        TBlock(),
-        ZBlock(),
-        ZInverseBlock()};
+    blocks = GetAllBlocks();
 };
 
 Block Game::GetRandomBlock()
@@ -28,4 +21,36 @@ Block Game::GetRandomBlock()
     int index = rand() % blocks.size();
     Block block = blocks[index];
     return {block};
+}
+
+std::vector<Block> Game::GetAllBlocks()
+{
+    return {
+        SquareBlock(),
+        IBlock(),
+        LBlock(),
+        LInverseBlock(),
+        TBlock(),
+        ZBlock(),
+        ZInverseBlock()};
+}
+
+void Game::StartGame()
+{
+    board.Draw();
+    currentBlock = GetRandomBlock();
+}
+
+void Game::Update()
+{
+    board.Draw();
+
+    keyPressed = GetKeyPressed();
+
+    if (keyPressed == KEY_ENTER)
+        currentBlock = GetRandomBlock();
+
+    currentBlock.Move(keyPressed);
+    currentBlock.Rotate(keyPressed);
+    currentBlock.Draw();
 }
