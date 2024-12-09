@@ -20,9 +20,9 @@ public:
 
     std::vector<Color> GetCellColours();
 
-    int Rotate(int key);
+    void Rotate(int key, int columns, int rows);
     bool CanMove(int columns, int rows, int row, int column);
-    bool CanRotate(int column, int row);
+    void ChangeOffSetByRotate(int column, int row);
     void Move(int columnChange, int rowChange, int columns, int rows);
     vector<int> GetChanges(int key);
     vector<Position> UpdatedPositions();

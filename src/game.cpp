@@ -19,7 +19,7 @@ bool lostPositionTrigger()
     double time;
     time = GetTime();
 
-    if (time - savedTime >= 0.5)
+    if (time - savedTime >= 0.75)
     {
         savedTime = GetTime();
         return true;
@@ -81,6 +81,6 @@ void Game::Draw(int key)
     if (lostPositionTrigger())
         currentBlock.Move(changes[0], 1, board.cols, board.rows);
 
-    currentBlock.Rotate(keyPressed);
+    currentBlock.Rotate(keyPressed, board.cols, board.rows);
     currentBlock.Draw();
 }

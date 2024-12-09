@@ -33,27 +33,6 @@ std::vector<Color> Block::GetCellColours()
         MAGENTA_GAME_COLOR};
 }
 
-bool Block::CanMove(int columns, int rows, int columnChange, int rowChange)
-{
-    for (Position cell : cells[RotationState])
-    {
-        int newColumn = cell.column + offSetColumn + columnChange;
-        int newRow = cell.row + offSetRow + rowChange;
-
-        if (columnChange != 0 && (newColumn < 0 || newColumn >= columns))
-        {
-            return false;
-        }
-
-        if (rowChange != 0 && (newRow < 0 || newRow >= rows))
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 vector<int> Block::GetChanges(int key)
 {
 
@@ -81,6 +60,27 @@ vector<int> Block::GetChanges(int key)
     return {columnChange, rowChange};
 }
 
+bool Block::CanMove(int columns, int rows, int columnChange, int rowChange)
+{
+    for (Position cell : cells[RotationState])
+    {
+        int newColumn = cell.column + offSetColumn + columnChange;
+        int newRow = cell.row + offSetRow + rowChange;
+
+        if (columnChange != 0 && (newColumn < 0 || newColumn >= columns))
+        {
+            return false;
+        }
+
+        if (rowChange != 0 && (newRow < 0 || newRow >= rows))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 void Block::Move(int columnChange, int rowChange, int columns, int rows)
 {
 
@@ -95,16 +95,45 @@ void Block::Move(int columnChange, int rowChange, int columns, int rows)
     offSetColumn = offSetColumn + columnChange;
 }
 
-bool Block::CanRotate(int column, int row)
+void Block::ChangeOffSetByRotate(int columns, int rows)
 {
-    return true;
+    int changeColumn = 0;
+    int changeRow = 0;
+
+    for (Position cell : cells[RotationState])
+    {
+        int newColumn = cell.column + offSetColumn;
+
+        int newRow = cell.row + offSetRow;
+
+        if (newColumn - changeColumn < 0)
+        {
+            changeColumn = newColumn;
+        }
+        else if (newColumn - changeColumn >= columns)
+        {
+            changeColumn = newColumn - columns + 1;
+        }
+
+        if (newRow - changeRow < 0)
+        {
+            changeRow = newRow;
+        }
+        else if (newRow - changeRow >= rows)
+        {
+            changeRow = newRow - rows + 1;
+        }
+    }
+
+    offSetColumn = offSetColumn - changeColumn;
+    offSetRow = offSetRow - changeRow;
 }
 
-int Block::Rotate(int key)
+void Block::Rotate(int key, int columns, int rows)
 {
     if (key != KEY_SPACE)
     {
-        return RotationState;
+        return;
     }
 
     RotationState++;
@@ -114,7 +143,7 @@ int Block::Rotate(int key)
         RotationState = 0;
     }
 
-    return RotationState;
+    ChangeOffSetByRotate(columns, rows);
 };
 
 vector<Position> Block::UpdatedPositions()
