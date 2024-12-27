@@ -84,7 +84,11 @@ void Game::Draw(int key)
     if (lostPositionTrigger() && CanMove(changes[0], 1))
         currentBlock.Move(changes[0], 1);
 
-    currentBlock.Rotate(keyPressed, board.cols, board.rows);
+    if (keyPressed == KEY_SPACE)
+    {
+        currentBlock.Rotate();
+        ChangeOffSetByRotate();
+    }
 
     currentBlock.Draw();
 }
@@ -108,6 +112,39 @@ bool Game::CanMove(int columnChange, int rowChange)
     }
 
     return true;
+}
+
+void Game::ChangeOffSetByRotate()
+{
+    int changeColumn = 0;
+    int changeRow = 0;
+
+    for (Position cell : currentBlock.UpdatedPositions())
+    {
+        int newColumn = cell.column;
+
+        int newRow = cell.row;
+
+        if (newColumn - changeColumn < 0)
+        {
+            changeColumn = newColumn;
+        }
+        else if (newColumn - changeColumn >= board.cols)
+        {
+            changeColumn = newColumn - board.cols + 1;
+        }
+
+        if (newRow - changeRow < 0)
+        {
+            changeRow = newRow;
+        }
+        else if (newRow - changeRow >= board.rows)
+        {
+            changeRow = newRow - board.rows + 1;
+        }
+    }
+
+    currentBlock.Move(-changeColumn, -changeRow);
 }
 
 void Game::StoreBlock()

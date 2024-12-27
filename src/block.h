@@ -20,7 +20,7 @@ public:
 
     std::vector<Color> GetCellColours();
 
-    void Rotate(int key, int columns, int rows);
+    void Rotate();
     void ChangeOffSetByRotate(int column, int row);
     void Move(int columnChange, int rowChange);
     vector<int> GetChanges(int key);

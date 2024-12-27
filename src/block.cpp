@@ -100,12 +100,8 @@ void Block::ChangeOffSetByRotate(int columns, int rows)
     offSetRow = offSetRow - changeRow;
 }
 
-void Block::Rotate(int key, int columns, int rows)
+void Block::Rotate()
 {
-    if (key != KEY_SPACE)
-    {
-        return;
-    }
 
     RotationState++;
 
@@ -113,8 +109,6 @@ void Block::Rotate(int key, int columns, int rows)
     {
         RotationState = 0;
     }
-
-    ChangeOffSetByRotate(columns, rows);
 };
 
 vector<Position> Block::UpdatedPositions()
