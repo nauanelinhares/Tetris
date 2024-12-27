@@ -33,33 +33,6 @@ std::vector<Color> Block::GetCellColours()
         MAGENTA_GAME_COLOR};
 }
 
-vector<int> Block::GetChanges(int key)
-{
-
-    int columnChange = 0;
-    int rowChange = 0;
-
-    switch (key)
-    {
-    case KEY_UP:
-        rowChange--;
-        break;
-    case KEY_DOWN:
-        rowChange++;
-        break;
-    case KEY_LEFT:
-        columnChange--;
-        break;
-    case KEY_RIGHT:
-        columnChange++;
-        break;
-    default:
-        break;
-    }
-
-    return {columnChange, rowChange};
-}
-
 void Block::Move(int columnChange, int rowChange)
 {
     offSetRow = offSetRow + rowChange;

@@ -74,7 +74,7 @@ void Game::Draw(int key)
     board.Draw();
 
     vector<int> changes;
-    changes = currentBlock.GetChanges(key);
+    changes = GetChanges(key);
 
     if (CanMove(changes[0], changes[1]))
     {
@@ -91,6 +91,11 @@ void Game::Draw(int key)
     }
 
     currentBlock.Draw();
+
+    if (!CanMove(changes[0], 1))
+    {
+        StoreBlock();
+    }
 }
 
 bool Game::CanMove(int columnChange, int rowChange)
@@ -155,4 +160,31 @@ void Game::StoreBlock()
         board.grid[position.row][position.column] = currentBlock.id;
     }
     currentBlock = GetRandomBlock();
+}
+
+vector<int> Game::GetChanges(int key)
+{
+
+    int columnChange = 0;
+    int rowChange = 0;
+
+    switch (key)
+    {
+    case KEY_UP:
+        rowChange--;
+        break;
+    case KEY_DOWN:
+        rowChange++;
+        break;
+    case KEY_LEFT:
+        columnChange--;
+        break;
+    case KEY_RIGHT:
+        columnChange++;
+        break;
+    default:
+        break;
+    }
+
+    return {columnChange, rowChange};
 }

@@ -12,6 +12,7 @@ public:
     void StoreBlock();
     bool CanMove(int columnChange, int rowChange);
     void ChangeOffSetByRotate();
+    vector<int> GetChanges(int key);
     Block GetRandomBlock();
     std::vector<Block> GetAllBlocks();
     Board board;
