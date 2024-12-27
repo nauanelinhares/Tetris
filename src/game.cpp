@@ -76,11 +76,46 @@ void Game::Draw(int key)
     vector<int> changes;
     changes = currentBlock.GetChanges(key);
 
-    currentBlock.Move(changes[0], changes[1], board.cols, board.rows);
+    if (CanMove(changes[0], changes[1]))
+    {
+        currentBlock.Move(changes[0], changes[1]);
+    }
 
-    if (lostPositionTrigger())
-        currentBlock.Move(changes[0], 1, board.cols, board.rows);
+    if (lostPositionTrigger() && CanMove(changes[0], 1))
+        currentBlock.Move(changes[0], 1);
 
     currentBlock.Rotate(keyPressed, board.cols, board.rows);
+
     currentBlock.Draw();
+}
+
+bool Game::CanMove(int columnChange, int rowChange)
+{
+    for (Position cell : currentBlock.UpdatedPositions())
+    {
+        int newColumn = cell.column + columnChange;
+        int newRow = cell.row + rowChange;
+
+        if (columnChange != 0 && (newColumn < 0 || newColumn >= board.cols))
+        {
+            return false;
+        }
+
+        if (rowChange != 0 && (newRow < 0 || newRow >= board.rows))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void Game::StoreBlock()
+{
+    vector<Position> positions = currentBlock.UpdatedPositions();
+    for (Position position : positions)
+    {
+        board.grid[position.row][position.column] = currentBlock.id;
+    }
+    currentBlock = GetRandomBlock();
 }

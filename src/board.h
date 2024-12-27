@@ -13,9 +13,9 @@ public:
     int grid[20][10];
     void Start();
     void Draw();
-
     int rows;
     int cols;
+    bool IsCellEmpty();
     std::vector<Color> GetCellColours();
 
 private:

@@ -81,16 +81,8 @@ bool Block::CanMove(int columns, int rows, int columnChange, int rowChange)
     return true;
 }
 
-void Block::Move(int columnChange, int rowChange, int columns, int rows)
+void Block::Move(int columnChange, int rowChange)
 {
-
-    bool canMove = CanMove(columns, rows, columnChange, rowChange);
-
-    if (!canMove)
-    {
-        return;
-    }
-
     offSetRow = offSetRow + rowChange;
     offSetColumn = offSetColumn + columnChange;
 }

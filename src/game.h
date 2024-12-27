@@ -9,6 +9,8 @@ public:
     void StartGame();
     void Draw(int key);
     void Update();
+    void StoreBlock();
+    bool CanMove(int columnChange, int rowChange);
     Block GetRandomBlock();
     std::vector<Block> GetAllBlocks();
     Board board;
