@@ -60,27 +60,6 @@ vector<int> Block::GetChanges(int key)
     return {columnChange, rowChange};
 }
 
-bool Block::CanMove(int columns, int rows, int columnChange, int rowChange)
-{
-    for (Position cell : cells[RotationState])
-    {
-        int newColumn = cell.column + offSetColumn + columnChange;
-        int newRow = cell.row + offSetRow + rowChange;
-
-        if (columnChange != 0 && (newColumn < 0 || newColumn >= columns))
-        {
-            return false;
-        }
-
-        if (rowChange != 0 && (newRow < 0 || newRow >= rows))
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 void Block::Move(int columnChange, int rowChange)
 {
     offSetRow = offSetRow + rowChange;
