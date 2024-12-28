@@ -39,40 +39,6 @@ void Block::Move(int columnChange, int rowChange)
     offSetColumn = offSetColumn + columnChange;
 }
 
-void Block::ChangeOffSetByRotate(int columns, int rows)
-{
-    int changeColumn = 0;
-    int changeRow = 0;
-
-    for (Position cell : cells[RotationState])
-    {
-        int newColumn = cell.column + offSetColumn;
-
-        int newRow = cell.row + offSetRow;
-
-        if (newColumn - changeColumn < 0)
-        {
-            changeColumn = newColumn;
-        }
-        else if (newColumn - changeColumn >= columns)
-        {
-            changeColumn = newColumn - columns + 1;
-        }
-
-        if (newRow - changeRow < 0)
-        {
-            changeRow = newRow;
-        }
-        else if (newRow - changeRow >= rows)
-        {
-            changeRow = newRow - rows + 1;
-        }
-    }
-
-    offSetColumn = offSetColumn - changeColumn;
-    offSetRow = offSetRow - changeRow;
-}
-
 void Block::Rotate()
 {
 
@@ -83,6 +49,15 @@ void Block::Rotate()
         RotationState = 0;
     }
 };
+void Block::UndoRotate()
+{
+    RotationState--;
+
+    if (RotationState < 0)
+    {
+        RotationState = 3;
+    }
+}
 
 vector<Position> Block::UpdatedPositions()
 {

@@ -81,8 +81,8 @@ void Game::Draw(int key)
         currentBlock.Move(changes[0], changes[1]);
     }
 
-    if (lostPositionTrigger() && CanMove(changes[0], 1))
-        currentBlock.Move(changes[0], 1);
+    if (lostPositionTrigger() && CanMove(0, 1))
+        currentBlock.Move(0, 1);
 
     if (keyPressed == KEY_SPACE)
     {
@@ -90,12 +90,9 @@ void Game::Draw(int key)
         ChangeOffSetByRotate();
     }
 
-    currentBlock.Draw();
+    StoreBlock();
 
-    if (!CanMove(changes[0], 1))
-    {
-        StoreBlock();
-    }
+    currentBlock.Draw();
 }
 
 bool Game::CanMove(int columnChange, int rowChange)
@@ -111,6 +108,10 @@ bool Game::CanMove(int columnChange, int rowChange)
         }
 
         if (rowChange != 0 && (newRow < 0 || newRow >= board.rows))
+        {
+            return false;
+        }
+        if (!board.grid[newRow][newColumn] == 0)
         {
             return false;
         }
@@ -149,17 +150,37 @@ void Game::ChangeOffSetByRotate()
         }
     }
 
-    currentBlock.Move(-changeColumn, -changeRow);
+    if (CanMove(-changeColumn, -changeRow))
+    {
+        currentBlock.Move(-changeColumn, -changeRow);
+    }
+    else
+    {
+        currentBlock.UndoRotate();
+    }
 }
 
 void Game::StoreBlock()
 {
-    vector<Position> positions = currentBlock.UpdatedPositions();
-    for (Position position : positions)
+
+    bool canStore = false;
+    for (Position pos : currentBlock.UpdatedPositions())
     {
-        board.grid[position.row][position.column] = currentBlock.id;
+        if (!board.IsCellEmpty(pos.column, pos.row + 1) || !CanMove(0, 1))
+        {
+            canStore = true;
+            break;
+        }
     }
-    currentBlock = GetRandomBlock();
+    if (canStore)
+    {
+        vector<Position> positions = currentBlock.UpdatedPositions();
+        for (Position position : positions)
+        {
+            board.grid[position.row][position.column] = currentBlock.id;
+        }
+        currentBlock = GetRandomBlock();
+    }
 }
 
 vector<int> Game::GetChanges(int key)

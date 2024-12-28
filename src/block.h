@@ -21,9 +21,9 @@ public:
     std::vector<Color> GetCellColours();
 
     void Rotate();
-    void ChangeOffSetByRotate(int column, int row);
+    void UndoRotate();
+
     void Move(int columnChange, int rowChange);
-    vector<int> GetChanges(int key);
     vector<Position> UpdatedPositions();
 
     int id;

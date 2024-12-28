@@ -55,3 +55,8 @@ std::vector<Color> Board::GetCellColours()
         CYAN_GAME_COLOR,
         MAGENTA_GAME_COLOR};
 }
+
+bool Board::IsCellEmpty(int column, int row)
+{
+    return !grid[row][column];
+}
