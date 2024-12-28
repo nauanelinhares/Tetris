@@ -16,6 +16,7 @@ public:
     int rows;
     int cols;
     bool IsCellEmpty(int column, int row);
+    bool isRowFull(int row);
     std::vector<Color> GetCellColours();
 
 private:

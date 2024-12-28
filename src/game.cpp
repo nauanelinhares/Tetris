@@ -91,6 +91,7 @@ void Game::Draw(int key)
     }
 
     StoreBlock();
+    CheckRows();
 
     currentBlock.Draw();
 }
@@ -208,4 +209,32 @@ vector<int> Game::GetChanges(int key)
     }
 
     return {columnChange, rowChange};
+}
+
+void Game::CheckRows()
+{
+    for (int i = board.rows; i > 0; i--)
+    {
+        if (board.isRowFull(i))
+        {
+            CleanRow(i);
+        }
+    }
+}
+
+void Game::CleanRow(int row)
+{
+
+    for (int j = 0; j < board.cols; j++)
+    {
+        board.grid[row][j] = 0;
+    }
+
+    for (int i = row; i > 0; i--)
+    {
+        for (int j = 0; j < board.cols; j++)
+        {
+            board.grid[i][j] = board.grid[i - 1][j];
+        }
+    }
 }

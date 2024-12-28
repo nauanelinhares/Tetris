@@ -60,3 +60,17 @@ bool Board::IsCellEmpty(int column, int row)
 {
     return !grid[row][column];
 }
+
+bool Board::isRowFull(int row)
+{
+    for (int j = 0; j < cols; j++)
+    {
+        if (grid[row][j] == 0)
+        {
+            return false;
+        }
+    }
+    std::cout << "row " << row << endl;
+
+    return true;
+}

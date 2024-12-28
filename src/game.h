@@ -15,7 +15,10 @@ public:
     vector<int> GetChanges(int key);
     Block GetRandomBlock();
     std::vector<Block> GetAllBlocks();
+
     Board board;
+    void CheckRows();
+    void CleanRow(int row);
 
 private:
     int keyPressed;
