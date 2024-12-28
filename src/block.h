@@ -11,10 +11,10 @@ class Block
 private:
     int RotationState = 0;
     int cellSize = CELLSIZE;
-    int offSetRow = 0;
-    int offSetColumn = 0;
 
 public:
+    int offSetRow = 0;
+    int offSetColumn = 0;
     Block();
     void Draw();
 

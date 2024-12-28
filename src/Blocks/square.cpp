@@ -8,7 +8,7 @@ public:
     {
         id = 4;
         color = colors[id];
-
+        offSetColumn = 4;
         cells[0] = {
             Position(0, 0),
             Position(0, 1),

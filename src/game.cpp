@@ -32,6 +32,7 @@ Game::Game()
 {
     board = Board();
     blocks = GetAllBlocks();
+    gameOver = false;
 };
 
 Block Game::GetRandomBlock()
@@ -63,7 +64,7 @@ void Game::Update()
 
     keyPressed = GetKeyPressed();
 
-    if (keyPressed == KEY_ENTER)
+    if (keyPressed == KEY_R)
         currentBlock = GetRandomBlock();
 
     Draw(keyPressed);
@@ -72,28 +73,35 @@ void Game::Update()
 void Game::Draw(int key)
 {
     board.Draw();
-
-    vector<int> changes;
-    changes = GetChanges(key);
-
-    if (CanMove(changes[0], changes[1]))
+    if (!gameOver)
     {
-        currentBlock.Move(changes[0], changes[1]);
+        vector<int> changes;
+        changes = GetChanges(key);
+
+        if (CanMove(changes[0], changes[1]))
+        {
+            currentBlock.Move(changes[0], changes[1]);
+        }
+
+        if (lostPositionTrigger() && CanMove(0, 1))
+            currentBlock.Move(0, 1);
+
+        if (keyPressed == KEY_SPACE)
+        {
+            currentBlock.Rotate();
+            ChangeOffSetByRotate();
+        }
+
+        StoreBlock();
+        CheckRows();
+
+        currentBlock.Draw();
     }
 
-    if (lostPositionTrigger() && CanMove(0, 1))
-        currentBlock.Move(0, 1);
-
-    if (keyPressed == KEY_SPACE)
+    if (gameOver && keyPressed == KEY_ENTER)
     {
-        currentBlock.Rotate();
-        ChangeOffSetByRotate();
+        Reset();
     }
-
-    StoreBlock();
-    CheckRows();
-
-    currentBlock.Draw();
 }
 
 bool Game::CanMove(int columnChange, int rowChange)
@@ -163,6 +171,15 @@ void Game::ChangeOffSetByRotate()
 
 void Game::StoreBlock()
 {
+    for (Position pos : currentBlock.UpdatedPositions())
+    {
+        if (!board.IsCellEmpty(pos.column, pos.row))
+        {
+            gameOver = true;
+            std::cout << "gameover" << endl;
+            return;
+        }
+    }
 
     bool canStore = false;
     for (Position pos : currentBlock.UpdatedPositions())
@@ -237,4 +254,10 @@ void Game::CleanRow(int row)
             board.grid[i][j] = board.grid[i - 1][j];
         }
     }
+}
+
+void Game::Reset()
+{
+    board = Board();
+    gameOver = false;
 }

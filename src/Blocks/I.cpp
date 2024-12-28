@@ -8,6 +8,8 @@ public:
     {
         id = 7;
         color = colors[id];
+        offSetRow = -2;
+        offSetColumn = 3;
 
         /*
 

@@ -21,6 +21,8 @@ public:
     void CleanRow(int row);
 
 private:
+    void Reset();
+    bool gameOver;
     int keyPressed;
     Block currentBlock;
     std::vector<Block> blocks;

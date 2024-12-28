@@ -9,7 +9,7 @@ public:
         id = 5;
 
         color = colors[id];
-
+        offSetColumn = 4;
         /*
 
         x * x
