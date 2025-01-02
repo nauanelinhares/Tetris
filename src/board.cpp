@@ -36,7 +36,7 @@ void Board::Draw()
         {
             cellValue = grid[i][j];
 
-            DrawRectangle(cellSize * j + initialOffsetColumn, cellSize * i + initialOffsetColumn, cellSize - 0.5, cellSize - 0.5, colors[cellValue]);
+            DrawRectangle(cellSize * j + offSet, cellSize * i + offSet, cellSize - 0.5, cellSize - 0.5, colors[cellValue]);
         }
     }
 }

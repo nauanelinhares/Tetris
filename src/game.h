@@ -21,7 +21,12 @@ public:
     void CleanRow(int row);
 
 private:
+    void UpdateInterface();
+
     void Reset();
+
+    int score;
+    Font font;
     bool gameOver;
     int keyPressed;
     Block currentBlock;

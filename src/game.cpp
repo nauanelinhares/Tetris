@@ -31,12 +31,14 @@ bool lostPositionTrigger()
 Game::Game()
 {
     board = Board();
+    font = LoadFont("../src/Font/monogram.ttf");
     blocks = GetAllBlocks();
     gameOver = false;
 };
 
 Block Game::GetRandomBlock()
 {
+    srand(time(0));
     int index = rand() % blocks.size();
     Block block = blocks[index];
     return {block};
@@ -62,12 +64,25 @@ void Game::StartGame()
 void Game::Update()
 {
 
+    UpdateInterface();
+
     keyPressed = GetKeyPressed();
 
     if (keyPressed == KEY_R)
         currentBlock = GetRandomBlock();
 
     Draw(keyPressed);
+}
+
+void Game::UpdateInterface()
+{
+    DrawTextEx(font, "Score", {365, 15}, 38, 2, WHITE);
+    DrawTextEx(font, "Next", {365, 175}, 38, 2, WHITE);
+    DrawRectangleRounded({320, 55, 170, 60}, 0.2, 6, LIGHT_BLUE);
+    DrawRectangleRounded({320, 215, 170, 180}, 0.2, 6, LIGHT_BLUE);
+
+    if (gameOver)
+        DrawTextEx(font, "GAME OVER", {320, 450}, 38, 2, WHITE);
 }
 
 void Game::Draw(int key)

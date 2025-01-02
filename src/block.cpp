@@ -14,7 +14,7 @@ void Block::Draw()
     for (int i = 0; i < cells.size(); i++)
     {
 
-        DrawRectangle(cellSize * cells[i].column + initialOffsetColumn, cellSize * cells[i].row + initialOffsetColumn, cellSize - 1, cellSize - 1, color);
+        DrawRectangle(cellSize * cells[i].column + offSet, cellSize * cells[i].row + offSet, cellSize - 1, cellSize - 1, color);
     }
 };
 
