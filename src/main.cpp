@@ -13,7 +13,6 @@ int main()
 
     InitWindow(500, 620, "Tetris");
 
-    Font font = LoadFont("Font/monogram.ttf");
     const char *message = "Score";
 
     SetTargetFPS(60);
@@ -24,6 +23,8 @@ int main()
 
     while (!WindowShouldClose())
     {
+        UpdateMusicStream(game.music);
+
         BeginDrawing();
 
         ClearBackground(DARK_BLUE);

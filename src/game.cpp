@@ -35,7 +35,16 @@ Game::Game()
     blocks = GetAllBlocks();
     gameOver = false;
     score = 0;
-};
+    InitAudioDevice();
+    music = LoadMusicStream("../src/Music/Tetris.mp3");
+    PlayMusicStream(music);
+}
+
+Game::~Game()
+{
+    UnloadMusicStream(music);
+    CloseAudioDevice();
+}
 
 Block Game::GetRandomBlock()
 {

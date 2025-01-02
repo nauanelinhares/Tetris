@@ -6,10 +6,13 @@ class Game
 {
 public:
     Game();
+    ~Game();
     void StartGame();
-    void Draw(int key);
     void Update();
-    void StoreBlock();
+    Music music;
+
+private:
+    void Draw(int key);
     bool CanMove(int columnChange, int rowChange);
     void ChangeOffSetByRotate();
     vector<int> GetChanges(int key);
@@ -19,9 +22,8 @@ public:
     Board board;
     void CheckRows();
     void CleanRow(int row);
-
-private:
     void UpdateInterface();
+    void StoreBlock();
 
     void Reset();
 
