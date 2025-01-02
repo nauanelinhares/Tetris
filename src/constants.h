@@ -3,6 +3,8 @@
 
 #define CELLSIZE 30
 
+#define initialOffsetColumn 10
+
 const Color DARK_GRAY_GAME_COLOR = {26, 31, 40, 255};
 const Color LIGHT_GRAY_GAME_COLOR = {189, 195, 199, 255};
 const Color RED_GAME_COLOR = {231, 76, 60, 255};

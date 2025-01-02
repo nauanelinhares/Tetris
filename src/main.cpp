@@ -10,10 +10,10 @@ using namespace std;
 int main()
 {
 
-    InitWindow(500, 600, "Hello World");
+    InitWindow(500, 620, "Tetris");
 
     Font font = LoadFont("Font/monogram.ttf");
-    const char *message = "Hello World";
+    const char *message = "Tetris";
 
     SetTargetFPS(60);
 

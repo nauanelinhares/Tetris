@@ -36,7 +36,7 @@ void Board::Draw()
         {
             cellValue = grid[i][j];
 
-            DrawRectangle(cellSize * j, cellSize * i, cellSize - 0.5, cellSize - 0.5, colors[cellValue]);
+            DrawRectangle(cellSize * j + initialOffsetColumn, cellSize * i + initialOffsetColumn, cellSize - 0.5, cellSize - 0.5, colors[cellValue]);
         }
     }
 }
@@ -70,7 +70,6 @@ bool Board::isRowFull(int row)
             return false;
         }
     }
-    std::cout << "row " << row << endl;
 
     return true;
 }

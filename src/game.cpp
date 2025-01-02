@@ -176,7 +176,6 @@ void Game::StoreBlock()
         if (!board.IsCellEmpty(pos.column, pos.row))
         {
             gameOver = true;
-            std::cout << "gameover" << endl;
             return;
         }
     }
