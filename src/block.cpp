@@ -7,14 +7,14 @@ Block::Block()
     colors = GetCellColours();
 }
 
-void Block::Draw()
+void Block::Draw(int offSetRow, int offSetColumn)
 {
     std::vector<Position> cells = UpdatedPositions();
 
     for (int i = 0; i < cells.size(); i++)
     {
 
-        DrawRectangle(cellSize * cells[i].column + offSet, cellSize * cells[i].row + offSet, cellSize - 1, cellSize - 1, color);
+        DrawRectangle(cellSize * cells[i].column + defaultOffSet + offSetColumn, cellSize * cells[i].row + defaultOffSet + offSetRow, cellSize - 1, cellSize - 1, color);
     }
 };
 

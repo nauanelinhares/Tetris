@@ -25,10 +25,13 @@ private:
 
     void Reset();
 
+    void IncreaseScore();
+
     int score;
     Font font;
     bool gameOver;
     int keyPressed;
     Block currentBlock;
+    Block nextBlock;
     std::vector<Block> blocks;
 };

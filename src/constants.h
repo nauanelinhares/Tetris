@@ -3,7 +3,7 @@
 
 #define CELLSIZE 30
 
-#define offSet 10
+#define defaultOffSet 10
 
 const Color DARK_GRAY_GAME_COLOR = {26, 31, 40, 255};
 const Color LIGHT_GRAY_GAME_COLOR = {189, 195, 199, 255};

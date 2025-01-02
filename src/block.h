@@ -16,7 +16,7 @@ public:
     int offSetRow = 0;
     int offSetColumn = 0;
     Block();
-    void Draw();
+    void Draw(int offSetRow = 0, int offSetColumn = 0);
 
     std::vector<Color> GetCellColours();
 

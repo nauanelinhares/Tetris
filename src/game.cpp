@@ -34,6 +34,7 @@ Game::Game()
     font = LoadFont("../src/Font/monogram.ttf");
     blocks = GetAllBlocks();
     gameOver = false;
+    score = 0;
 };
 
 Block Game::GetRandomBlock()
@@ -59,6 +60,7 @@ std::vector<Block> Game::GetAllBlocks()
 void Game::StartGame()
 {
     currentBlock = GetRandomBlock();
+    nextBlock = GetRandomBlock();
 }
 
 void Game::Update()
@@ -77,8 +79,10 @@ void Game::Update()
 void Game::UpdateInterface()
 {
     DrawTextEx(font, "Score", {365, 15}, 38, 2, WHITE);
-    DrawTextEx(font, "Next", {365, 175}, 38, 2, WHITE);
     DrawRectangleRounded({320, 55, 170, 60}, 0.2, 6, LIGHT_BLUE);
+    DrawTextEx(font, TextFormat("%d", score), {400, 55}, 38, 2, WHITE);
+
+    DrawTextEx(font, "Next", {365, 175}, 38, 2, WHITE);
     DrawRectangleRounded({320, 215, 170, 180}, 0.2, 6, LIGHT_BLUE);
 
     if (gameOver)
@@ -111,6 +115,7 @@ void Game::Draw(int key)
         CheckRows();
 
         currentBlock.Draw();
+        nextBlock.Draw(270, 270);
     }
 
     if (gameOver && keyPressed == KEY_ENTER)
@@ -211,7 +216,8 @@ void Game::StoreBlock()
         {
             board.grid[position.row][position.column] = currentBlock.id;
         }
-        currentBlock = GetRandomBlock();
+        currentBlock = nextBlock;
+        nextBlock = GetRandomBlock();
     }
 }
 
@@ -248,9 +254,15 @@ void Game::CheckRows()
     {
         if (board.isRowFull(i))
         {
+            IncreaseScore();
             CleanRow(i);
         }
     }
+}
+
+void Game::IncreaseScore()
+{
+    score = score + 100;
 }
 
 void Game::CleanRow(int row)
@@ -274,4 +286,5 @@ void Game::Reset()
 {
     board = Board();
     gameOver = false;
+    score = 0;
 }
